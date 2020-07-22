@@ -44,7 +44,7 @@ public class SVPinView: UIView {
     @IBInspectable public var activeBorderLineColor: UIColor = UIColor.black
     
     @IBInspectable public var borderLineThickness: CGFloat = 2
-    @IBInspectable public var activeBorderLineThickness: CGFloat = 4
+    @IBInspectable public var activeBorderLineThickness: CGFloat = 2
     
     @IBInspectable public var fieldBackgroundColor: UIColor = UIColor.clear
     @IBInspectable public var activeFieldBackgroundColor: UIColor = UIColor.clear
@@ -322,12 +322,6 @@ extension SVPinView : UICollectionViewDataSource, UICollectionViewDelegate, UICo
             textField.becomeFirstResponder()
         }
         
-        if !(textField.text?.isEmpty ?? true) {
-            containerView.layer.borderColor = activeBorderLineColor.cgColor
-        } else {
-            containerView.layer.borderColor = borderLineColor.cgColor
-        }
-        
         // Finished loading pinView
         if indexPath.row == pinLength - 1 && isLoading {
             isLoading = false
@@ -399,6 +393,11 @@ extension SVPinView : UITextFieldDelegate
         if let containerView = textField.superview?.viewWithTag(51),
         let underLine = textField.superview?.viewWithTag(50) {
             self.stylePinField(containerView: containerView, underLine: underLine, isActive: false)
+            if !(textField.text?.isEmpty ?? true) {
+                containerView.layer.borderColor = activeBorderLineColor.cgColor
+            } else {
+                containerView.layer.borderColor = borderLineColor.cgColor
+            }
         } else { showPinError(error: "ERR-107: Type Mismatch - Line 394") }
     }
     
