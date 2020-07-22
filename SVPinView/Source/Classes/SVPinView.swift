@@ -322,6 +322,12 @@ extension SVPinView : UICollectionViewDataSource, UICollectionViewDelegate, UICo
             textField.becomeFirstResponder()
         }
         
+        if !(textField.text?.isEmpty ?? true) {
+            containerView.layer.borderColor = activeBorderLineColor.cgColor
+        } else {
+            containerView.layer.borderColor = borderLineColor.cgColor
+        }
+        
         // Finished loading pinView
         if indexPath.row == pinLength - 1 && isLoading {
             isLoading = false
